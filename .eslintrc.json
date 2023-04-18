@@ -1,0 +1,27 @@
+{
+    "extends": [
+        "next/core-web-vitals",
+        "plugin:@typescript-eslint/recommended"
+    ],
+    "parser": "@typescript-eslint/parser",
+    "rules": {
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-inferrable-types": "off",
+        "@typescript-eslint/no-unused-vars": "warn",
+        "import/no-unresolved": "off",
+        "semi": ["error", "always"],
+        "camelcase": "warn",
+        "prefer-const": [
+            "error",
+            {
+                "destructuring": "all"
+            }
+        ],
+        "space-before-blocks": "warn",
+        "key-spacing": "warn",
+        "keyword-spacing": "warn"
+    },
+    "settings": {
+        "import/parsers": { "@typescript-eslint/parser": [".ts", ".tsx"] }
+    }
+}

@@ -1,0 +1,41 @@
+name: CI/CD
+
+on:
+    push:
+        paths:
+            - src/**
+            - public/**
+            - styles/**
+            - .github/workflows/ci-cd.yml
+            - package.json
+            - package-lock.json
+            - next.config.js
+    pull_request:
+
+jobs:
+    build:
+        name: Build
+        if: ${{ !contains(github.event.head_commit.message, '[failing]') }}
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout code
+                uses: actions/checkout@v3
+
+            -   name: Install dependencies
+                run: npm ci
+
+            -   name: Build
+                run: npm run build
+                env:
+                    NODE_ENV: production
+
+            -   name: Run and check if up
+                run: |
+                    npm run start & (for attempt in {1..4}; do
+                        sleep 1
+                        if (curl --fail https://localhost:3000); then
+                            exit 0;
+                        fi
+                        echo "Waiting for server to start ($attempt/20)..."
+                    done) && exit 1
+
