@@ -7,3 +7,22 @@ updates:
         update-types: ["version-update:semver-patch"]
     schedule:
       interval: "weekly"
+    groups:
+      actions:
+        patterns:
+          - "@actions/*"
+      typescript:
+        patterns:
+          - "typescript"
+          - "@typescript-*"
+      eslint:
+        patterns:
+          - "eslint"
+          - "eslint-*"
+      next:
+        patterns:
+          - "next"
+          - "react"
+          - "react-dom"
+          - "eslint-config-next"
+          - "@types/react"
